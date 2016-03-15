@@ -1,0 +1,74 @@
+﻿body {
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif ;
+		}
+
+		td.caption{
+		color: rgb(0,178,90);
+		font-weight:bold;
+		text-align:right;
+		padding:10px;
+		}
+
+		td.control{
+		text-align:left;
+		font-weight:bold;
+		width:400px;
+		}
+
+		td.control input,select{
+		width:300px;
+		}
+
+		td.header {
+		color: rgb(0,178,90);
+		font-weight:bold;
+		font-size:20pt;
+		}
+
+		td.subheader {
+		color: rgb(0,178,90);
+		font-size:18pt;
+		}
+
+		H3 {
+			font-size:12px;
+		}
+		
+div.Content	
+{
+    text-align:left;
+    font-size:12px;
+}	
+
+    td.activity{
+		border: solid 1px grey;
+		padding:5px;
+	}
+
+	tr td.activity:first-child {
+		text-align:left;
+	}
+
+.TableActivities
+{
+   font-size:xx-small; 
+   border:solid 1px grey; 
+   margin-left:20px; 
+   margin-right:20px; 
+   padding:0px; 
+   border-collapse:collapse;
+}
+
+.TableActivitiesHeader
+{
+    background-color:#007DC3;
+    font-weight:bold;
+    color:white; 
+    font-size:12pt; 
+    text-align:center;
+}
+
+table.TableActivities tr td
+{
+    border:solid 1px grey;
+} 
