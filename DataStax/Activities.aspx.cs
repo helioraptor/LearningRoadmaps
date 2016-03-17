@@ -62,6 +62,8 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
     protected void BindData()
     {
         List<Onboarding.Activity> activities = new List<Onboarding.Activity>();
+        //activities.Add(new Onboarding.Activity());
+        
         foreach (Onboarding.Activity a in Onboarding.GetActivities(ClientID)) 
         {
             bool notfound = false;
@@ -78,8 +80,10 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
                 activities.Add(a);
             }
         }
+         
         this.gvActivites.DataSource = activities;
         this.gvActivites.DataBind();
+        
 
         this.lblName.Text = Session["Name"].ToString();
         this.lblEmail.Text = Session["Email"].ToString();
@@ -92,7 +96,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
 
     public void PdfClick(object sender, EventArgs e)
     {
-        this.imgLogo.Visible = false;
+        //this.imgLogo.Visible = false;
         this.btnPrint.Visible = false;
         this.btnPdf.Visible = false;
         this.btnExcel.Visible = false;
