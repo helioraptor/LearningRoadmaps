@@ -6,68 +6,161 @@
 <head runat="server">
     <title></title>
     <link type="text/css" rel="Stylesheet" href="Style.css" />
+    <style>
+        body {
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif ;
+		font-size:13px; 
+		}
+
+		td.caption{
+		color: rgb(0,178,90);
+		font-weight:bold;
+		text-align:right;
+		padding:10px;
+		}
+
+		td.control{
+		text-align:left;
+		font-weight:bold;
+		width:400px;
+		}
+
+		td.control input,select{
+		width:300px;
+		}
+
+		td.header {
+		color: rgb(0,178,90);
+		font-weight:bold;
+		font-size:20pt;
+		}
+
+		td.subheader {
+		color: rgb(0,178,90);
+		font-size:18pt;
+		}
+
+		H3 {
+			font-size:12px;
+		}
+		
+div.Content	
+{
+    text-align:left;
+    font-size:12px;
+}	
+
+    td.activity{
+		border: solid 1px grey;
+		padding:5px;
+	}
+
+	tr td.activity:first-child {
+		text-align:left;
+	}
+
+.TableActivities
+{
+   font-size:12px; 
+   border:solid 1px grey; 
+   margin-left:20px; 
+   margin-right:20px; 
+   padding:0px; 
+   border-collapse:collapse;
+}
+
+.TableActivitiesHeader
+{
+    background-color:#007DC3;
+    font-weight:bold;
+    color:white; 
+    font-size:12px; 
+    text-align:center;
+}
+
+tr.TableActivitiesHeader th
+{
+    padding:10px;
+}
+
+table.TableActivities tr td
+{
+    border:solid 1px grey;
+    padding:3px;
+}
+
+    </style>
 </head>
-<body>
-    <form id="form1" runat="server">
+<body style="width:100%">
+    <form id="form1" runat="server" style="width:100%;">
+    <div style="margin:auto; width:60%; text-align:center;">
 
-    <center>
-	<a href="Default.aspx"><asp:Image ImageUrl="img/Logo.png" border="none" width="600px" runat="server" ID="imgLogo" /></a>
-
+   
+    <img src="http://learningroadmaps.com/DataStax/img/Logo.png" alt="LOGO" width="600" style="border:none;cursor:pointer;" align="middle" onclick="window.location='Default.aspx';" />
+   
 		<br/><br/>
 		<button style="width:150px;" onclick="window.print();" runat="server" id="btnPrint"><img src="img/print.png" style="vertical-align:middle;"> Print</button>
-		<button style="width:150px;" onserverclick="ExcelClick" runat="server" id="btnExcel"><img src="img/excel.png" style="vertical-align:middle;"> Export to Excel</button>
-		<button style="width:150px;" onserverclick="PdfClick" runat="server" id="btnPdf"><img src="img/pdf.png" style="vertical-align:middle;"> Export to PDF</button>
 
+        <!--
+		<button style="width:150px;" onserverclick="ExcelClick" runat="server" id="btnExcel"><img src="img/excel.png" style="vertical-align:middle;"> Export to Excel</button>
+		-->
+        
+        <button style="width:150px;" onserverclick="PdfClick" runat="server" id="btnPdf"><img src="img/pdf.png" style="vertical-align:middle;"> Export to PDF</button>
+ 
         <asp:LinkButton ID="l1" runat="server"></asp:LinkButton>
 
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-right:50px" >
+
+        <table border="0">
         <tr>
-            <td style="width:50%">
-                &nbsp;
-            </td>
-            <td style="width:50%">
-        <table width="100%">
+        <td style="width:50%">&nbsp;</td>
+        <td>
+
+        <table width="400px" border="0" style="margin-right:0px; font-weight:bold;">
     	<tr>
-			<td style="text-align:right; font-weight:bold; font-size:12px; border:hidden;">Name:</td>
-			<td colspan="2" style="border-top:none; border-left:none; border:hidden; text-align:left; font-weight:bold; font-size:12px;"><asp:Label ID="lblName" runat="server" name="lblName"/></td>
-			<td  style="border-top:none; border-left:none; border:hidden;"></td>
-			<td  style="text-align:right; font-weight:bold; font-size:12px; border-top:none; border-left:none; border:hidden;">Plan Date:</td>
-			<td style="border-top:none; border-left:none; border:hidden; font-weight:bold; font-size:12px;"><asp:Label runat="server" id="lblPlanDate" name="lblPlanDate"/></td>
+			<td style="text-align:right">Name:</td>
+            <td style="text-align:left" width="100"><asp:Label ID="lblName" runat="server" name="lblName"/></td>
+
+			<td style="text-align:right">Plan Date:</td>
+            <td style="text-align:left" width="100"><asp:Label runat="server" id="lblPlanDate" name="lblPlanDate"/></td>
+
 		</tr>
 		<tr>
-			<td style="text-align:right; font-weight:bold; font-size:12px; border-top:hidden; border-left:hidden;">Role:</td>
-			<td style="border-top:none; border-left:none; border-top:hidden; border-left:hidden;  text-align:left; font-weight:bold; font-size:12px;" colspan="2"><asp:Label ID="lblEmail" runat="server" name="lblEmail"/></td>
-			<td style="border-top:0; border-left:none; border-top:hidden; border-left:hidden;"></td>
-			<td style="text-align:right; font-weight:bold; font-size:12px; border-top:hidden; border-left:hidden;">Duration:</td>
-			<td style="border-top:none; border-left:none; border-top:hidden; border-left:hidden; border-right:hidden; font-weight:bold; font-size:12px;"><asp:Label ID="lblDuration" runat="server" name="lblDuration" Text="12 weeks"/></td>
+			<td style="text-align:right">Role:</td>
+            <td style="text-align:left"><asp:Label ID="lblEmail" runat="server" name="lblEmail"/></td>
+
+			<td style="text-align:right">Duration:</td>
+            <td style="text-align:left"><asp:Label ID="lblDuration" runat="server" name="lblDuration" Text="12 weeks"/></td>
 		</tr>
-    </table>
-            </td>
+        </table>
+      
+        </td>
         </tr>
-    </table>
-    
+        </table>
+      
 
     <asp:GridView ID="gvActivites"  runat="server" AutoGenerateColumns="false" CssClass="TableActivities" HeaderStyle-CssClass="TableActivitiesHeader" GridLines="None">
         <Columns>
-                        <asp:TemplateField HeaderText="Learning Activity Detail" ControlStyle-Width="500px">
+                        <asp:TemplateField HeaderText="Learning Activity Detail" ItemStyle-HorizontalAlign="left" ItemStyle-Width="50%">
                         <ItemTemplate>
+                        <div style="text-align:left">
                             <asp:Label runat="server" Text='<%# Eval("Content") %>' />
+</div>
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Topic Category" ControlStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Category">
                         <ItemTemplate>
                             <asp:Label  runat="server" Text='<%# Eval("Topic") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Onboarding Week">
+                    <asp:TemplateField HeaderText="Week">
                         <ItemTemplate>
                             <asp:Label  runat="server" Text='<%# Eval("Week") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                   <asp:TemplateField HeaderText="Est. Time for Activity">
+                   <asp:TemplateField HeaderText="Duration">
                         <ItemTemplate>
                             <asp:Label ID="Label1"  runat="server" Text='<%# Eval("Time") %>' />
                         </ItemTemplate>
@@ -79,15 +172,15 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Notes">
+                    <asp:TemplateField HeaderText="Notes" ItemStyle-Width="20%">
                         <ItemTemplate>
                             &nbsp;
                         </ItemTemplate>
                     </asp:TemplateField>
          </Columns>
     </asp:GridView>
-    </center>
 
+    </div>
     </form>
 </body>
 </html>

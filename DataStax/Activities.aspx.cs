@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -62,6 +63,8 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
     protected void BindData()
     {
         List<Onboarding.Activity> activities = new List<Onboarding.Activity>();
+        //activities.Add(new Onboarding.Activity());
+        
         foreach (Onboarding.Activity a in Onboarding.GetActivities(ClientID)) 
         {
             bool notfound = false;
@@ -78,8 +81,10 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
                 activities.Add(a);
             }
         }
+         
         this.gvActivites.DataSource = activities;
         this.gvActivites.DataBind();
+        
 
         this.lblName.Text = Session["Name"].ToString();
         this.lblEmail.Text = Session["Email"].ToString();
@@ -92,7 +97,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
 
     public void PdfClick(object sender, EventArgs e)
     {
-        this.imgLogo.Visible = false;
+        //this.imgLogo.Visible = false;
         this.btnPrint.Visible = false;
         this.btnPdf.Visible = false;
         this.btnExcel.Visible = false;
@@ -103,8 +108,11 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
         StringWriter sw = new StringWriter();
         HtmlTextWriter hw = new HtmlTextWriter(sw);
         this.Page.RenderControl(hw);
-        StringReader sr = new StringReader(sw.ToString());
-        using (Document pdfDoc = new Document(PageSize.LETTER, 10f, 10f, 100f, 0f))
+
+        String Content = adjustContentString(sw.ToString());
+        StringReader sr = new StringReader(Content);
+
+        using (Document pdfDoc = new Document(PageSize.LETTER, 10f, 10f, 10f, 10f))
         {
             PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
             pdfDoc.Open();
@@ -120,5 +128,16 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
     {
         throw new Exception("ExcelClick");
     }
+
+    #region protected methods
+
+    protected string adjustContentString(string content)
+    {
+        var result =  Regex.Replace(content, "<span><p","<div><p");
+        result = Regex.Replace(result, "</p></span>","</p></div>");
+        return result;
+    }
+
+    #endregion
 
 }
