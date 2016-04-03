@@ -57,6 +57,7 @@ public partial class Onboarding_Client_Welcome : System.Web.UI.Page
 
     protected void btnNext_Click(object sender, EventArgs e)
     {
+        
         //Response.Redirect(String.Format("Activities.aspx?Id={0}", ClientID));
         Response.Redirect("Activities.aspx");
     }

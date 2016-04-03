@@ -21,6 +21,9 @@ public class Onboarding
     [Serializable]
     public class Selection
     {
+        public Selection()
+        { 
+        }
         public Selection(int QuestionID, string Tag)
         {
             this.QuestionID = QuestionID;
@@ -79,7 +82,8 @@ public class Onboarding
         public string Topic { get; set; }
         public string Week { get; set; }
         public string Day { get; set; }
-        public string Time { get; set; } 
+        public string Time { get; set; }
+        public Boolean Checked { get; set; } 
     }
 
     [Serializable]
@@ -896,4 +900,107 @@ public class Onboarding
         }
     }
 
+    public static List<int> GetSelectedActivities(string Email)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["mdf"].ConnectionString;
+        List<int> result = new List<int>();
+        using (SqlConnection dbConnection = new SqlConnection(cs))
+        {
+            dbConnection.Open();
+            SqlCommand myCommand = new SqlCommand("obGetSelections");
+            myCommand.Connection = dbConnection;
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@Email", Email);
+            using (SqlDataReader dr = myCommand.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    int id = dr.GetInt32(dr.GetOrdinal("id"));
+                    result.Add(id);
+                }
+            }
+        }
+        return result;
+    }
+
+
+    public static void SetSavedSession(string Email, string Name, string Role, string Selections)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["mdf"].ConnectionString;
+        using (SqlConnection dbConnection = new SqlConnection(cs))
+        {
+            dbConnection.Open();
+            SqlCommand myCommand = new SqlCommand("obSetSession");
+            myCommand.Connection = dbConnection;
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@Email", Email);
+            myCommand.Parameters.AddWithValue("@Name", Name);
+            myCommand.Parameters.AddWithValue("@Role", Role);
+            myCommand.Parameters.AddWithValue("@Selections", Selections);
+            myCommand.ExecuteNonQuery();
+        }
+    }
+    public static string GetSavedSession(string Email)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["mdf"].ConnectionString;
+        string Selections = "";
+        using (SqlConnection dbConnection = new SqlConnection(cs))
+        {
+            dbConnection.Open();
+            SqlCommand myCommand = new SqlCommand("obGetSession");
+            myCommand.Connection = dbConnection;
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@Email", Email);
+            using (SqlDataReader dr = myCommand.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    Selections = dr.GetString(dr.GetOrdinal("Selections"));
+                }
+            }
+        }
+        return Selections;
+    }
+    public static string GetSavedSessionName(string Email)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["mdf"].ConnectionString;
+        string Selections = "";
+        using (SqlConnection dbConnection = new SqlConnection(cs))
+        {
+            dbConnection.Open();
+            SqlCommand myCommand = new SqlCommand("obGetSession");
+            myCommand.Connection = dbConnection;
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@Email", Email);
+            using (SqlDataReader dr = myCommand.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    Selections = dr.GetString(dr.GetOrdinal("Name"));
+                }
+            }
+        }
+        return Selections;
+    }
+    public static string GetSavedSessionRole(string Email)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["mdf"].ConnectionString;
+        string Selections = "";
+        using (SqlConnection dbConnection = new SqlConnection(cs))
+        {
+            dbConnection.Open();
+            SqlCommand myCommand = new SqlCommand("obGetSession");
+            myCommand.Connection = dbConnection;
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@Email", Email);
+            using (SqlDataReader dr = myCommand.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    Selections = dr.GetString(dr.GetOrdinal("Role"));
+                }
+            }
+        }
+        return Selections;
+    }
 }

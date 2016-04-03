@@ -181,7 +181,7 @@ table.TableActivities tr td
 
                     <asp:TemplateField HeaderText="Complete?">
                         <ItemTemplate>
-                            <asp:CheckBox ID="cb1" runat="server" onclick='<%# Eval("Id","CheckBoxCheck(this,{0})") %>' />
+                            <asp:CheckBox ID="cb1" runat="server" onclick='<%# Eval("Id","CheckBoxCheck(this,{0})") %>' checked= '<%# Eval("Checked") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
 
