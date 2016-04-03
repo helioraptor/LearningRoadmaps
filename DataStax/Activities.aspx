@@ -93,10 +93,11 @@ table.TableActivities tr td
 </head>
 <body style="width:100%">
     <form id="form1" runat="server" style="width:100%;">
-    <div style="margin:auto; width:60%; text-align:center;">
+    <div style="margin:auto; max-width: 1024px; text-align:center;">
 
-    <a href="Default.aspx"><img src="http://learningroadmaps.com/DataStax/img/Logo.png" alt="LOGO" width="600" style="border:none"/></a>
-
+   
+    <img src="http://learningroadmaps.com/DataStax/img/Logo.png" alt="LOGO" width="600" style="border:none;cursor:pointer;" align="middle" onclick="window.location='Default.aspx';" />
+   
 		<br/><br/>
 		<button style="width:150px;" onclick="window.print();" runat="server" id="btnPrint"><img src="img/print.png" style="vertical-align:middle;"> Print</button>
 
@@ -108,43 +109,60 @@ table.TableActivities tr td
  
         <asp:LinkButton ID="l1" runat="server"></asp:LinkButton>
 
-        <table width="400px" border="0" style="margin-right:0px;">
+
+        <table border="0">
+        <tr>
+        <td style="width:50%">&nbsp;</td>
+        <td>
+
+        <table width="400px" border="0" style="margin-right:0px; font-weight:bold;">
     	<tr>
-			<td>Name:<asp:Label ID="lblName" runat="server" name="lblName"/></td>
-			<td>Plan Date:<asp:Label runat="server" id="lblPlanDate" name="lblPlanDate"/></td>
+			<td style="text-align:right">Name:</td>
+            <td style="text-align:left" width="100"><asp:Label ID="lblName" runat="server" name="lblName"/></td>
+
+			<td style="text-align:right">Plan Date:</td>
+            <td style="text-align:left" width="100"><asp:Label runat="server" id="lblPlanDate" name="lblPlanDate"/></td>
+
 		</tr>
 		<tr>
-			<td>Role:<asp:Label ID="lblEmail" runat="server" name="lblEmail"/></td>
-			<td>Duration:<asp:Label ID="lblDuration" runat="server" name="lblDuration" Text="12 weeks"/></td>
+			<td style="text-align:right">Role:</td>
+            <td style="text-align:left"><asp:Label ID="lblEmail" runat="server" name="lblEmail"/></td>
+
+			<td style="text-align:right">Duration:</td>
+            <td style="text-align:left"><asp:Label ID="lblDuration" runat="server" name="lblDuration" Text="12 weeks"/></td>
 		</tr>
         </table>
-
+      
+        </td>
+        </tr>
+        </table>
+      
 
     <asp:GridView ID="gvActivites"  runat="server" AutoGenerateColumns="false" CssClass="TableActivities" HeaderStyle-CssClass="TableActivitiesHeader" GridLines="None">
         <Columns>
-                        <asp:TemplateField HeaderText="Learning Activity Detail" ControlStyle-Width="500px" ItemStyle-HorizontalAlign="left">
+                        <asp:TemplateField HeaderText="Learning Activity Detail" ItemStyle-HorizontalAlign="left" ItemStyle-Width="50%">
                         <ItemTemplate>
                         <div style="text-align:left">
-                            <asp:Label runat="server" Text='<%# Eval("Content") %>' />
+                            <%# Eval("Content") %>
 </div>
                         </ItemTemplate>
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Category">
                         <ItemTemplate>
-                            <asp:Label  runat="server" Text='<%# Eval("Topic") %>' />
+                            <%# Eval("Topic") %>
                         </ItemTemplate>
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Week">
                         <ItemTemplate>
-                            <asp:Label  runat="server" Text='<%# Eval("Week") %>' />
+                            <%# Eval("Week") %>
                         </ItemTemplate>
                     </asp:TemplateField>
 
                    <asp:TemplateField HeaderText="Duration">
                         <ItemTemplate>
-                            <asp:Label ID="Label1"  runat="server" Text='<%# Eval("Time") %>' />
+                            <%# Eval("Time") %>
                         </ItemTemplate>
                     </asp:TemplateField>
 
