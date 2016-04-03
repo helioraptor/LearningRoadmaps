@@ -109,7 +109,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
         HtmlTextWriter hw = new HtmlTextWriter(sw);
         this.Page.RenderControl(hw);
 
-        String Content = adjustContentString(sw.ToString());
+        String Content = sw.ToString(); //adjustContentString(sw.ToString());
         StringReader sr = new StringReader(Content);
 
         using (Document pdfDoc = new Document(PageSize.LETTER, 10f, 10f, 10f, 10f))

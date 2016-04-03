@@ -878,4 +878,22 @@ public class Onboarding
         }
         return result;
     }
+
+    /***********************************************************************************************************************************/
+    public static void SelectActivityForEmail(string Id, string Checked, string Email)
+    {
+        string cs = ConfigurationManager.ConnectionStrings["mdf"].ConnectionString;
+        using (SqlConnection dbConnection = new SqlConnection(cs))
+        {
+            dbConnection.Open();
+            SqlCommand myCommand = new SqlCommand("obSelectActivity");
+            myCommand.Connection = dbConnection;
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@id", Id);
+            myCommand.Parameters.AddWithValue("@Checked", Checked);
+            myCommand.Parameters.AddWithValue("@Email", Email);
+            myCommand.ExecuteNonQuery();
+        }
+    }
+
 }
