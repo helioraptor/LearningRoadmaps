@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Text;
+using System.Xml.Serialization;
+using System.IO;
 
 public partial class Onboarding_Client_Default : System.Web.UI.Page
 {
@@ -142,6 +145,12 @@ public partial class Onboarding_Client_Default : System.Web.UI.Page
 
         this.Selections = newSelections;
 
+        //SAVE ROLE
+        if (QuestionID.Equals("25")) 
+        {
+            ViewState["Role"] = (sender as DropDownList).SelectedItem.Text;
+        }
+
         BindData();
     }
 
@@ -150,6 +159,18 @@ public partial class Onboarding_Client_Default : System.Web.UI.Page
         Session["Selections"] = this.Selections;
         Session["Name"] = this.txtName.Text;
         Session["Email"] = this.txtEmail.Text;
+        Session["Role"]  = ViewState["Role"];
+
+        StringBuilder output = new StringBuilder();
+        var writer = new StringWriter(output);
+
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Onboarding.Selection>));
+        serializer.Serialize(writer, this.Selections);
+
+        String Selections = output.ToString();
+
+        Onboarding.SetSavedSession(this.txtEmail.Text, this.txtName.Text, ViewState["Role"].ToString(), Selections);
+
         //Response.Redirect(String.Format("Welcome.aspx?ID={0}", ClientID));
         Response.Redirect("Welcome.aspx");
     }

@@ -65,7 +65,9 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
     {
         List<Onboarding.Activity> activities = new List<Onboarding.Activity>();
         //activities.Add(new Onboarding.Activity());
-        
+
+        List<int> CheckedActivities = Onboarding.GetSelectedActivities(Session["Email"].ToString());
+
         foreach (Onboarding.Activity a in Onboarding.GetActivities(ClientID)) 
         {
             bool notfound = false;
@@ -79,6 +81,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
             }
             if (!notfound) 
             {
+                a.Checked = CheckedActivities.Contains(a.Id);
                 activities.Add(a);
             }
         }
@@ -88,7 +91,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
         
 
         this.lblName.Text = Session["Name"].ToString();
-        this.lblEmail.Text = Session["Email"].ToString();
+        this.lblEmail.Text = Session["Role"].ToString();
         this.lblPlanDate.Text = DateTime.Now.ToShortDateString();
     }
 
