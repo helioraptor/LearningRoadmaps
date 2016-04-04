@@ -18,6 +18,7 @@ using iTextSharp.tool.xml;
 
 public partial class Onboarding_Client_Activities : System.Web.UI.Page
 {
+    protected const float PDF_MARGINS = 10f;
     int ClientID
     {
         get
@@ -112,7 +113,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
         String Content = sw.ToString(); //adjustContentString(sw.ToString());
         StringReader sr = new StringReader(Content);
 
-        using (Document pdfDoc = new Document(PageSize.LETTER, 10f, 10f, 10f, 10f))
+        using (Document pdfDoc = new Document(PageSize.A4, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS))
         {
             PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
             pdfDoc.Open();
