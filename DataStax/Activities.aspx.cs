@@ -116,7 +116,7 @@ public partial class Onboarding_Client_Activities : System.Web.UI.Page
         String Content = sw.ToString(); //adjustContentString(sw.ToString());
         StringReader sr = new StringReader(Content);
 
-        using (Document pdfDoc = new Document(PageSize.A4, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS))
+        using (Document pdfDoc = new Document(PageSize.LETTER, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS, PDF_MARGINS))
         {
             PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
             pdfDoc.Open();
